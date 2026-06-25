@@ -72,18 +72,7 @@
       margin-bottom: 40px;
     }
     .page-header-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 24px;
       margin-bottom: 10px;
-    }
-    .page-header-top img {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      mix-blend-mode: multiply;
-      flex-shrink: 0;
     }
     .page-header .label {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -217,6 +206,96 @@
       color: var(--muted);
     }
 
+    /* LIGHTBOX */
+    .photo-grid img { cursor: pointer; transition: opacity 0.15s; }
+    .photo-grid img:hover { opacity: 0.85; }
+
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-overlay.open { display: flex; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .lightbox-inner img {
+      max-width: 80vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+    }
+    .lb-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .lb-btn:hover { background: rgba(255,255,255,0.3); }
+    .lb-close {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    .lb-close:hover { opacity: 1; }
+    .lb-counter {
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.6);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+    }
+
+    /* Logo in grid */
+    .photo-grid .logo-cell {
+      background: #f0f0f0;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .photo-grid .logo-cell:hover { opacity: 0.85; }
+    .photo-grid .logo-cell img {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      border: none;
+      height: auto;
+    }
+
     @media (max-width: 560px) {
       .photo-grid { grid-template-columns: 1fr 1fr; }
       .page-header h1 { font-size: 1.5rem; }
@@ -244,7 +323,6 @@
       <div class="label">Project &mdash; Entrepreneurship</div>
       <div class="page-header-top">
         <h1>Probie Technologies</h1>
-        <img src="probie-logo.png" alt="Probie Technologies logo" />
       </div>
       <div class="meta">February 2025 &ndash; June 2025 &nbsp;&middot;&nbsp; Tufts University Derby New Ventures Competition</div>
     </div>
@@ -289,15 +367,13 @@
     </div>
 
     <h2 class="section-title">Photos</h2>
-    <div class="photo-grid">
-      <!--
-        Replace each photo-placeholder below with an <img> tag once you have the image files.
-        Example: <img src="probie1.jpg" alt="Team at competition" />
-        Upload probie1.jpg, probie2.jpg, probie3.jpg to your GitHub repo alongside this file.
-      -->
-      <img src="probie1.jpg" alt="Award Check" />
-      <img src="probie2.jpg" alt="Team w Jack Derby" />
-      <img src="probie3.jpg" alt="Presentation" />
+    <div class="photo-grid" id="photoGrid">
+      <img src="probie1.jpg" alt="Award Check" onclick="openLightbox(0)" />
+      <img src="probie2.jpg" alt="Team w Jack Derby" onclick="openLightbox(1)" />
+      <img src="probie3.jpg" alt="Presentation" onclick="openLightbox(2)" />
+      <div class="logo-cell" onclick="openLightbox(3)">
+        <img src="probie-logo.png" alt="Probie Technologies logo" />
+      </div>
     </div>
 
     <a class="back-link" href="index.html#projects">&larr; Back to Projects</a>
@@ -305,5 +381,59 @@
     <footer>&copy; 2026 Will Eykyn</footer>
 
   </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBackdrop(event)">
+    <div class="lightbox-inner">
+      <button class="lb-close" onclick="closeLightbox()" title="Close">&#10005;</button>
+      <button class="lb-btn" id="lbPrev" onclick="shiftLightbox(-1)">&#8592;</button>
+      <img id="lbImg" src="" alt="" />
+      <button class="lb-btn" id="lbNext" onclick="shiftLightbox(1)">&#8594;</button>
+      <div class="lb-counter" id="lbCounter"></div>
+    </div>
+  </div>
+
+  <script>
+    const photos = [
+      { src: 'probie1.jpg', alt: 'Award Check' },
+      { src: 'probie2.jpg', alt: 'Team with Jack Derby' },
+      { src: 'probie3.jpg', alt: 'Presentation' },
+      { src: 'probie-logo.png', alt: 'Probie Technologies logo' },
+    ];
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    function closeLightboxOnBackdrop(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    function shiftLightbox(dir) {
+      current = (current + dir + photos.length) % photos.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      document.getElementById('lbImg').src = photos[current].src;
+      document.getElementById('lbImg').alt = photos[current].alt;
+      document.getElementById('lbCounter').textContent = (current + 1) + ' / ' + photos.length;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') shiftLightbox(1);
+      if (e.key === 'ArrowLeft') shiftLightbox(-1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 </body>
 </html>
