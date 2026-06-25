@@ -372,11 +372,11 @@
       <p>
         Position messages update a vessel's track history — capped at 200 points — and refresh live data such as
         speed, heading, and course over ground. Static data messages, broadcast roughly every six minutes by
-        Class A vessels, carry vessel name, ship type, dimensions, and voyage details (destination and ETA).
-        These are decoded against the full ITU-R M.1371 ship type table and merged into the vessel record.
+        Class A vessels, carry vessel name, ship type, dimensions, and voyage details (destination and ETA),
+        all of which are parsed and merged into the vessel record.
       </p>
       <p>
-        Every five seconds the system regenerates a Folium map using CartoDB Positron tiles. Each vessel is
+        Every five seconds the system regenerates an interactive map. Each vessel is
         rendered as an SVG boat marker rotated to its actual heading (or course over ground as fallback),
         color-coded by AIS class. Track history is drawn as a hidden polyline that toggles visible when the
         marker is clicked. Clicking any vessel also opens a summary popup; clicking "Learn more" slides in a
@@ -409,8 +409,7 @@
       <li>Live WebSocket ingestion from AISStream.io with automatic reconnection and exponential backoff.</li>
       <li>Five AIS message types parsed: PositionReport, StandardClassBPositionReport, ExtendedClassBPositionReport, LongRangeAisBroadcastMessage, and ShipStaticData.</li>
       <li>Per-vessel track history maintained in a rolling 200-point buffer; older positions are dropped as new ones arrive.</li>
-      <li>Full ITU-R M.1371 ship type code lookup table covering 40+ vessel categories from fishing and sailing to tankers and military.</li>
-      <li>AIS text field cleaning: strips padding characters and non-printable ASCII common in raw AIS data.</li>
+<li>AIS text field cleaning: strips padding characters and non-printable ASCII common in raw AIS data.</li>
       <li>ETA parsing handles both structured AIS dict format (month/day/hour/minute) and raw string values.</li>
       <li>SVG boat markers dynamically colored by vessel class and rotated to match true heading or COG.</li>
       <li>Interactive side panel with live data, vessel info, dimensions, and voyage details &mdash; slides in from the right on "Learn more."</li>
