@@ -225,6 +225,19 @@
       line-height: 1.6;
     }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn-learn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 7px 16px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.83rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-learn:hover { background: var(--accent); color: #fff; }
     .tag {
       background: var(--tag-bg);
       color: var(--tag-text);
@@ -359,10 +372,10 @@
         <img src="headshot.jpg" alt="Will Eykyn" />
       </div>
       <div class="hero-text">
-        <h1>Data &amp; Software Engineer<br>based in Denver, CO</h1>
+        <h1>Data Analyst &amp; Developer<br>based in Denver, CO</h1>
         <p>
-          CS grad from Tufts University (Magna Cum Laude). I build data pipelines,
-          predictive models, and software tools that turn messy data into clear answers.
+          CS grad from Tufts University (Magna Cum Laude). I turn raw data into decisions
+          through pipelines, models, and tools built to last.
         </p>
         <div class="hero-links">
           <a class="linkedin-card" href="https://www.linkedin.com/in/william-eykyn/" target="_blank" rel="noopener">
@@ -395,6 +408,7 @@
           <span class="tag">Docker</span>
           <span class="tag">Geospatial</span>
         </div>
+        <a class="btn-learn" href="https://github.com/Will-Eykyn/AISMaritimeTracker" target="_blank" rel="noopener">Learn more &rarr;</a>
       </div>
 
       <div class="project">
@@ -414,6 +428,7 @@
           <span class="tag">Machine Learning</span>
           <span class="tag">Data Validation</span>
         </div>
+        <a class="btn-learn" href="northsails.html">Learn more &rarr;</a>
       </div>
 
       <div class="project">
@@ -429,6 +444,7 @@
           <span class="tag">Market Research</span>
           <span class="tag">Public Speaking</span>
         </div>
+        <a class="btn-learn" href="probie.html">Learn more &rarr;</a>
       </div>
     </section>
 
