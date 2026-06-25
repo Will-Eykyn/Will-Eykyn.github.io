@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>North Sails ML Project &mdash; Will Eykyn</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f7;
+      --text: #1a1a1a;
+      --muted: #666;
+      --accent: #2c5f8a;
+      --accent-light: #e8f0f8;
+      --border: #e0e0e0;
+      --card-bg: #ffffff;
+      --code-bg: #f3f4f6;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    nav ul li a {
+      display: block;
+      padding: 16px 20px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav ul li a:hover { color: var(--accent); }
+    nav ul li a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 52px 24px 100px;
+    }
+
+    .breadcrumb {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .page-header { margin-bottom: 40px; }
+    .page-header .label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-size: 1.9rem;
+      font-weight: normal;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .page-header .meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: 0.78rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .body-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      color: #333;
+      line-height: 1.75;
+    }
+    .body-text p { margin-bottom: 16px; }
+    .body-text strong { color: var(--text); font-weight: 600; }
+
+    .step-header {
+      font-size: 1.1rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: bold;
+      color: var(--text);
+      margin: 32px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bullet-list {
+      padding-left: 22px;
+      margin-bottom: 16px;
+    }
+    .bullet-list li {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    code, .code-block {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #c0392b;
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px 24px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      line-height: 1.5;
+      white-space: pre;
+    }
+    .code-block .kw { color: #569cd6; }
+    .code-block .fn { color: #dcdcaa; }
+    .code-block .str { color: #ce9178; }
+    .code-block .cm { color: #6a9955; }
+
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 5px 5px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.93rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; }
+    .tag {
+      background: #eef3f8;
+      color: var(--accent);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 48px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="index.html#projects" class="active">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> &rsaquo; <a href="index.html#projects">Projects</a> &rsaquo; North Sails
+    </div>
+
+    <div class="page-header">
+      <div class="label">Project &mdash; Machine Learning &amp; Data Engineering</div>
+      <h1>Using Machine Learning to Design Sails &mdash; North Sails</h1>
+      <div class="meta">Summer 2024 &nbsp;&middot;&nbsp; North Sails, Marblehead MA &nbsp;&middot;&nbsp; Data &amp; Systems Intern</div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">C#</span>
+      <span class="tag">ML.NET</span>
+      <span class="tag">LGBM</span>
+      <span class="tag">SQL Server</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Data Validation</span>
+      <span class="tag">IQR Outlier Reduction</span>
+      <span class="tag">Correlation Analysis</span>
+    </div>
+
+    <h2 class="section-title">Overview</h2>
+    <div class="body-text">
+      <p>
+        This project was a summer internship at North Sails with the goal of using machine learning to automatically
+        predict the material properties of sail battens. A batten is a stiff rod inserted into a sail to maintain its shape.
+        The key property to predict is <strong>flexural rigidity (EI)</strong> &mdash; a measure of how stiff a batten is &mdash;
+        which determines how the sail holds its shape in different wind conditions.
+      </p>
+      <p>
+        By the end of the summer I had built a working program that predicts battens for seven mainsail types:
+        regular, full batten, high roach, boom furling (regular), square-top, boom furling (square-top), and mast furling.
+        The output is now integrated into North Sails' internal design software and actively used by sail designers
+        around the world.
+      </p>
+      <p>
+        This is a technical write-up of the approach I took, including dataset refinement, model training, and
+        iterative tuning.
+      </p>
+    </div>
+
+    <h2 class="section-title">Step 1: Refine the Dataset</h2>
+    <div class="body-text">
+      <p>
+        The goal was to predict batten width, thickness, and flexural rigidity (EI) for any mainsail Carbon/E-Glass batten.
+        I started by building a SQL view in SQL Server Management Studio filtered to a single sail type (SailID).
+        The view included columns: <code>ListOrder</code>, <code>SailID</code>, <code>Area</code>, <code>Stiffness (EI)</code>,
+        <code>BattenQty</code>, <code>E</code>, <code>P</code>, <code>AmMax</code>, <code>BattenLength</code>,
+        <code>LOA</code>, <code>Luff</code>, <code>FinishedFoot</code>, and <code>BattenStyleID</code>.
+      </p>
+      <p>
+        To use luff and finished foot as reliable features, I first had to eliminate data entry errors from the database.
+        I calculated the percentage difference between the boat's actual E/P dimensions and the sail's recorded
+        Luff/FinishedFoot values:
+      </p>
+    </div>
+
+    <div class="code-block"><span class="cm">-- EFoot: % difference between boat E and sail FinishedFoot</span>
+<span class="kw">ROUND</span>(ABS(<span class="kw">CAST</span>(dbo.BoatGen.E <span class="kw">AS FLOAT</span>) - <span class="kw">CAST</span>(t.FinishedFoot <span class="kw">AS FLOAT</span>))
+  / <span class="kw">CAST</span>(dbo.BoatGen.E <span class="kw">AS FLOAT</span>) * 100, 2)
+
+<span class="cm">-- PLuff: % difference between boat P and sail Luff</span>
+<span class="kw">ROUND</span>(ABS(<span class="kw">CAST</span>(dbo.BoatGen.P <span class="kw">AS FLOAT</span>) - <span class="kw">CAST</span>(t.Luff <span class="kw">AS FLOAT</span>))
+  / <span class="kw">CAST</span>(dbo.BoatGen.P <span class="kw">AS FLOAT</span>) * 100, 2)</div>
+
+    <div class="body-text">
+      <p>Any rows with EFoot or PLuff &gt; 10% were filtered out as likely data entry errors.</p>
+
+      <p>
+        To understand which features correlated with EI, I wrote a stored procedure in SQL Server to calculate
+        correlation coefficients between any two columns:
+      </p>
+    </div>
+
+    <div class="code-block"><span class="kw">EXEC</span> <span class="fn">sp_calculatecorrelation</span> <span class="str">'[viewPath].[viewName]'</span>, <span class="str">'Column1'</span>, <span class="str">'Column2'</span>;</div>
+
+    <div class="body-text">
+      <p>
+        This returns a score between &plusmn;1, where values closer to &plusmn;1 indicate stronger correlation.
+        Results near 0 indicate no meaningful relationship.
+      </p>
+
+      <p>
+        The raw data had enormous variance in EI values across different designers, even for sails of similar size.
+        To reduce this noise, I applied <strong>IQR-based outlier reduction</strong>: I split the data into luff length
+        groups (0&ndash;10m, 10&ndash;15m, 15&ndash;20m, 20m+) and then by List Order, calculated the interquartile range
+        within each group, and filtered out EI values outside Q1&ndash;Q3. This kept only the "middle 50%" of values
+        &mdash; the designs that reflect typical North Sails practice rather than outlier choices.
+      </p>
+
+      <div class="callout">
+        <strong>GIGO principle:</strong> ML models are only as good as the data you feed them. Filtering to the IQR
+        dramatically reduced noise and caused R&sup2; values to improve significantly after retraining.
+      </div>
+
+      <p>
+        After applying the WHERE clause to enforce the IQR bounds, I re-ran the correlation procedure to verify
+        the refined dataset showed stronger relationships between input features and EI values.
+      </p>
+    </div>
+
+    <h2 class="section-title">Step 2: Train the Model</h2>
+    <div class="body-text">
+      <p>
+        I trained a separate model for every <strong>List Order</strong> (batten position) within each sail type.
+        For most sail types, I built models for the top 6 batten positions &mdash; sails with more than 6 battens
+        have all battens below position 6 share the LO6 prediction, since there isn't enough data to justify a
+        7th or 8th model.
+      </p>
+
+      <p>Each model was trained in Visual Studio using the ML.NET <strong>Value Prediction</strong> scenario with these features:</p>
+    </div>
+
+    <ul class="bullet-list">
+      <li>Luff</li>
+      <li>FinishedFoot</li>
+      <li>Area</li>
+      <li>AmMax (adjusted modulus maximum)</li>
+      <li>BattenLength</li>
+      <li>LOA (length overall)</li>
+    </ul>
+
+    <div class="body-text">
+      <p>
+        All features are numerical. I experimented with categorical inputs (combining SailIDs and List Orders into
+        single models) but found the results far less accurate. The better approach was to handle categorical logic
+        in code &mdash; routing each prediction to the correct model based on SailID and ListOrder &mdash; and keep
+        each model focused on a single position and sail type.
+      </p>
+
+      <p>
+        I used <strong>5-fold cross-validation</strong> and selected the <strong>Light Gradient Boosted Machine (LGBM)</strong>
+        algorithm after testing alternatives, as it consistently produced the highest and most stable R&sup2; values.
+        Each model was trained for 2 minutes, and the process was repeated for all List Orders within each SailID.
+      </p>
+
+      <p>
+        To convert the EI prediction into a physical batten recommendation (width and thickness), I mapped EI values
+        to actual available batten codes. Width was determined by LOA using threshold rules derived from plotting
+        LOA vs Width across the dataset. Thickness was initially set at the midpoint EI between adjacent available
+        battens, then refined during tuning.
+      </p>
+    </div>
+
+    <h2 class="section-title">Step 3: Testing &amp; Tuning</h2>
+    <div class="body-text">
+      <p>
+        After training the full set of models, I wrote a C# program that takes sail parameters from the command
+        line (<code>sailID</code>, <code>luff</code>, <code>finishedFoot</code>, <code>area</code>, <code>amMax</code>,
+        <code>loa</code>, <code>carbon</code>, and batten lengths LO1&ndash;LO7), routes the inputs to the correct
+        models, and returns a full batten prediction.
+      </p>
+
+      <p>
+        To tune the models, I selected 20 boats from the North Sails database spanning a range of sizes, brands,
+        and types. For each boat I recorded the actual (as-built) batten EI, the raw model EI output, and the
+        final batten prediction, then plotted all three on scatter plots per boat. Tuning involved iterating on
+        width and thickness thresholds based on patterns I observed across the 20 boats:
+      </p>
+    </div>
+
+    <ul class="bullet-list">
+      <li>Is the raw EI prediction or the mapped batten EI closer to the actual?</li>
+      <li>Is a particular batten position (e.g. LO3) consistently under-predicted?</li>
+      <li>Does the width jump to a larger size at too small an LOA?</li>
+    </ul>
+
+    <div class="callout">
+      After 4 iterations of tuning on a Hinckley 51 SW test case, the model's predicted EI curve closely
+      tracked the actual as-built EI across all 6 batten positions, compared to the significant divergence
+      seen in the initial un-tuned prediction.
+    </div>
+
+    <div class="body-text">
+      <p>
+        I recorded every change made (what was adjusted, from what value to what value, and which boats prompted it)
+        so that adjustments could be reversed if a change hurt performance elsewhere.
+      </p>
+    </div>
+
+    <h2 class="section-title">North Sails &amp; ML in the Future</h2>
+    <div class="body-text">
+      <p>
+        Through this project I identified several other areas where ML could reduce manual lookup work
+        at North Sails: corner attachment ring sizing, strapping width selection, reef attachment hardware,
+        and edge tape selection. The common thread is replacing Excel lookup tables and "check a previous
+        project" workflows with data-driven predictions.
+      </p>
+      <p>
+        One future idea discussed with the team was using AI to compare a sail's original design shape
+        to its actual flying shape, and automatically generate a proposed revision that would fly closer
+        to the target. That is a larger-scope project requiring a full team, but it's a compelling
+        direction for ML in sail design.
+      </p>
+      <p>
+        A question I left open: is ML.NET the right framework long-term? I found it well-suited to
+        numerical regression but limited with categorical data. It may be worth exploring scikit-learn
+        or Google's Vertex AI for future projects where categorical features are more central.
+      </p>
+    </div>
+
+    <h2 class="section-title">Internship Recap</h2>
+    <div class="body-text">
+      <p>
+        I started with no clear path to solving the problem and jumped in by retraining existing models
+        to understand the data and tools. The early approach (predicting width and thickness separately)
+        produced batten combinations that didn't exist in practice. The key breakthrough was switching to
+        predicting EI directly &mdash; a universal property that maps cleanly to both dimensions. Once I
+        made that pivot, the project gained momentum quickly.
+      </p>
+      <p>
+        IQR-based data refinement was the other major unlock. Even Glenn Cook was surprised by the
+        range of EI values used by North designers across similar sail sizes. Filtering to the middle
+        50% gave the models much cleaner signal and improved R&sup2; values substantially.
+      </p>
+      <p>
+        The solution is not as modular as I'd have liked &mdash; there is a lot of routing logic around
+        the models to direct inputs to the correct SailID/ListOrder model. But this specificity is what
+        made the predictions accurate. Once I had the template for a new SailID, adding new sail types
+        became progressively faster.
+      </p>
+      <p>
+        Thanks to Shane Elliott and Glenn Cook for their guidance, patience, and for giving me real
+        ownership of the project from day one.
+      </p>
+    </div>
+
+    <a class="back-link" href="index.html#projects">&larr; Back to Projects</a>
+
+    <footer>&copy; 2026 Will Eykyn</footer>
+
+  </div>
+</body>
+</html>
