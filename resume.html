@@ -32,7 +32,7 @@
     nav ul {
       list-style: none;
       display: flex;
-      max-width: 760px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -50,7 +50,7 @@
     nav ul li a.active { color: var(--accent); border-bottom-color: var(--accent); }
 
     .content {
-      max-width: 760px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 52px 24px 100px;
     }
@@ -178,14 +178,29 @@
       color: #333;
     }
 
-    /* SKILLS */
-    .skills-list {
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .skill-group h3 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: bold;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .skill-group ul { list-style: none; }
+    .skill-group ul li {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.92rem;
       color: #333;
-      line-height: 1.7;
+      padding: 2px 0;
     }
-    .skills-list strong { color: var(--text); }
+    @media (max-width: 500px) { .skills-grid { grid-template-columns: 1fr; } }
 
     /* DOWNLOAD BUTTON */
     .download-bar {
@@ -263,6 +278,19 @@
 
       <div class="job">
         <div class="job-header">
+          <span class="job-title"><span class="company">DHUKR Tool</span> &nbsp;|&nbsp; <span class="role">Freelance Web Developer</span></span>
+          <span class="job-date">August 2025 &ndash; September 2025</span>
+        </div>
+        <div class="job-location">Remote &mdash; 40 hrs/week</div>
+        <ul>
+          <li>Redesigned and implemented a full retail website aligned to business growth objectives, collaborating closely with the founder through an iterative, feedback-driven development process.</li>
+          <li>Engineered a dedicated B2B wholesale acquisition channel including a custom inquiry workflow, gaining direct exposure to SKU structure, wholesale account management, and channel-specific buyer flows.</li>
+          <li>Translated stakeholder requirements into technical solutions that improved customer conversion and streamlined the purchasing experience.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
           <span class="job-title"><span class="company">North Sails</span> &nbsp;|&nbsp; <span class="role">Data &amp; Systems Intern</span></span>
           <span class="job-date">June 2024 &ndash; August 2024</span>
         </div>
@@ -286,7 +314,7 @@
           <span class="job-date">January 2026 &ndash; Present</span>
         </div>
         <ul>
-          <li>Built a real-time asset monitoring system continuously ingesting live telemetry from active vessels, tracking operational parameters (position, speed, heading) for vessels within a monitored region.</li>
+          <li>Built a real-time vessel monitoring system continuously ingesting live telemetry from active vessels, tracking operational parameters (position, speed, heading) for vessels within a monitored region.</li>
           <li>Designed the data pipeline to reliably ingest, structure, and display high-frequency streaming data, maintaining uninterrupted operational visibility under live conditions.</li>
           <li>Containerized the application with Docker for consistent, repeatable deployment.</li>
         </ul>
@@ -322,10 +350,46 @@
 
     <div class="resume-section">
       <h2>Skills</h2>
-      <div class="skills-list">
-        <p><strong>Data &amp; Operations:</strong> Microsoft Excel, SQL Server Management Studio, MySQL, data analysis, data validation, process documentation, Tableau</p>
-        <p><strong>Tools &amp; Technologies:</strong> Microsoft Office, Git, Docker, Linux, Visual Studio, VS Code</p>
-        <p><strong>Programming:</strong> Python, C#, C++, SQL</p>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Programming</h3>
+          <ul>
+            <li>Python</li>
+            <li>SQL</li>
+            <li>C#</li>
+            <li>C++</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Tools &amp; Platforms</h3>
+          <ul>
+            <li>SQL Server Management Studio</li>
+            <li>ML.NET</li>
+            <li>Docker</li>
+            <li>Git / GitHub</li>
+            <li>Visual Studio / VS Code</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Data &amp; Analysis</h3>
+          <ul>
+            <li>Data pipelines</li>
+            <li>Machine learning (gradient boosting, regression, ensemble methods)</li>
+            <li>Model validation &amp; performance metrics</li>
+            <li>Excel &amp; data modeling</li>
+            <li>Tableau</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Other</h3>
+          <ul>
+            <li>Object-oriented programming</li>
+            <li>Linux</li>
+            <li>REST APIs</li>
+            <li>Web development</li>
+            <li>Technical writing</li>
+          </ul>
+        </div>
       </div>
     </div>
 
