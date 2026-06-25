@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume &mdash; Will Eykyn</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f7;
+      --text: #1a1a1a;
+      --muted: #666;
+      --accent: #2c5f8a;
+      --border: #e0e0e0;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    nav ul li a {
+      display: block;
+      padding: 16px 20px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav ul li a:hover { color: var(--accent); }
+    nav ul li a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 52px 24px 100px;
+    }
+
+    /* RESUME HEADER */
+    .resume-header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--text);
+    }
+    .resume-header h1 {
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .resume-header .contact-info {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      color: #444;
+    }
+    .resume-header .contact-info a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .resume-header .contact-info a:hover { text-decoration: underline; }
+
+    /* RESUME SECTIONS */
+    .resume-section {
+      margin-bottom: 28px;
+    }
+    .resume-section h2 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 4px;
+      margin-bottom: 16px;
+    }
+
+    .summary {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.93rem;
+      color: #333;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    /* JOB ENTRIES */
+    .job { margin-bottom: 20px; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    .job-title {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      font-weight: bold;
+    }
+    .job-title .company { font-weight: bold; }
+    .job-title .role { font-weight: normal; font-style: italic; }
+    .job-date {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.87rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .job-location {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .job ul {
+      padding-left: 20px;
+      margin-top: 6px;
+    }
+    .job ul li {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.92rem;
+      color: #333;
+      margin-bottom: 5px;
+      line-height: 1.55;
+    }
+
+    /* EDUCATION */
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      font-weight: bold;
+    }
+    .edu-date {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.87rem;
+      color: var(--muted);
+    }
+    .edu-degree {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.92rem;
+      font-style: italic;
+      color: #333;
+      margin-bottom: 6px;
+    }
+    .edu ul {
+      padding-left: 20px;
+    }
+    .edu ul li {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.92rem;
+      color: #333;
+    }
+
+    /* SKILLS */
+    .skills-list {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.92rem;
+      color: #333;
+      line-height: 1.7;
+    }
+    .skills-list strong { color: var(--text); }
+
+    /* DOWNLOAD BUTTON */
+    .download-bar {
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-download {
+      display: inline-block;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #1f4a6e; }
+
+    @media print {
+      nav, .download-bar { display: none; }
+      body { background: #fff; }
+      .content { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resume.html" class="active">Resume</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="download-bar">
+      <!-- Swap in link to your PDF resume once uploaded to GitHub -->
+      <!-- <a class="btn-download" href="WilliamEykynResume.pdf" target="_blank">Download PDF</a> -->
+    </div>
+
+    <div class="resume-header">
+      <h1>William Eykyn</h1>
+      <div class="contact-info">
+        <a href="mailto:willeykyn@gmail.com">willeykyn@gmail.com</a> &nbsp;|&nbsp;
+        +1 (917) 573-5998 &nbsp;|&nbsp;
+        <a href="https://www.linkedin.com/in/william-eykyn/" target="_blank" rel="noopener">linkedin.com/in/william-eykyn</a>
+      </div>
+    </div>
+
+    <p class="summary">
+      Computer Science graduate with experience in data analysis, real-time monitoring systems, and cross-functional
+      operational coordination. Skilled in Excel and SQL for managing complex datasets and supporting data-driven
+      decision-making. Proven ability to communicate clearly with customers and stakeholders, coordinate across teams,
+      and document processes with precision.
+    </p>
+
+    <div class="resume-section">
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title"><span class="company">Alta Ski Area</span> &nbsp;|&nbsp; <span class="role">Lift Operator</span></span>
+          <span class="job-date">November 2025 &ndash; March 2026</span>
+        </div>
+        <div class="job-location">Alta, UT &mdash; 40 hrs/week</div>
+        <ul>
+          <li>Operated in a safety-critical, high-volume environment with strict adherence to protocols.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title"><span class="company">North Sails</span> &nbsp;|&nbsp; <span class="role">Data &amp; Systems Intern</span></span>
+          <span class="job-date">June 2024 &ndash; August 2024</span>
+        </div>
+        <div class="job-location">Marblehead, MA &mdash; 40 hrs/week</div>
+        <ul>
+          <li>Queried and analyzed large-scale relational datasets using SQL Server Management Studio, applying data validation, filtering, and outlier reduction techniques to improve data accuracy.</li>
+          <li>Identified trends and performance patterns across historical design data by segmenting datasets and calculating correlation coefficients, surfacing insights that directly informed production decisions.</li>
+          <li>Built and maintained Excel-based workbooks to evaluate model performance, visualizing predicted vs. actual outputs to support iterative refinement.</li>
+          <li>Translated analytical outputs into production-ready specifications, integrating the full solution into North Sails' internal design software &mdash; now actively used by sail designers globally.</li>
+          <li>Partnered with senior engineers and non-technical design stakeholders to communicate findings and drive process improvements, replacing manual lookup workflows and reducing design iteration time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h2>Projects</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title"><span class="company">AIS Maritime Tracker</span></span>
+          <span class="job-date">January 2026 &ndash; Present</span>
+        </div>
+        <ul>
+          <li>Built a real-time asset monitoring system continuously ingesting live telemetry from active vessels, tracking operational parameters (position, speed, heading) for vessels within a monitored region.</li>
+          <li>Designed the data pipeline to reliably ingest, structure, and display high-frequency streaming data, maintaining uninterrupted operational visibility under live conditions.</li>
+          <li>Containerized the application with Docker for consistent, repeatable deployment.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="job-title"><span class="company">Probie</span> &nbsp;&mdash; <span class="role">Winner, Derby New Venture Competition 2025</span></span>
+          <span class="job-date">February 2025 &ndash; June 2025</span>
+        </div>
+        <div class="job-location">35 hrs/week</div>
+        <ul>
+          <li>Identified and quantified administrative inefficiencies in police report-writing workflows through field research across multiple departments, uncovering opportunities to reduce completion time by up to 1 hour per report.</li>
+          <li>Designed a cloud-based system concept with AI-assisted tools to automate evidence synthesis and streamline report generation, reducing reliance on manual data compilation.</li>
+          <li>Communicated technical and operational value through venture pitches, advancing through three competitive rounds and securing 3rd place and a $5,000 award.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h2>Education</h2>
+      <div class="edu">
+        <div class="edu-header">
+          <span class="edu-school">Tufts University, Medford, MA</span>
+          <span class="edu-date">September 2021 &ndash; May 2025</span>
+        </div>
+        <div class="edu-degree">Bachelor of Science in Computer Science, Entrepreneurship Minor &nbsp;|&nbsp; GPA 3.70 &nbsp;|&nbsp; Magna Cum Laude</div>
+        <ul>
+          <li><strong>Athletics:</strong> 2021&ndash;2025 Tufts University Varsity Sailing Team &amp; 2024 NEISA All Academic Sailing Team</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <p><strong>Data &amp; Operations:</strong> Microsoft Excel, SQL Server Management Studio, MySQL, data analysis, data validation, process documentation, Tableau</p>
+        <p><strong>Tools &amp; Technologies:</strong> Microsoft Office, Git, Docker, Linux, Visual Studio, VS Code</p>
+        <p><strong>Programming:</strong> Python, C#, C++, SQL</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

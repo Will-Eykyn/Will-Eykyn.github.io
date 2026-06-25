@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probie Technologies &mdash; Will Eykyn</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f7;
+      --text: #1a1a1a;
+      --muted: #666;
+      --accent: #2c5f8a;
+      --accent-light: #e8f0f8;
+      --border: #e0e0e0;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    nav ul li a {
+      display: block;
+      padding: 16px 20px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav ul li a:hover { color: var(--accent); }
+    nav ul li a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 52px 24px 100px;
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* PAGE HEADER */
+    .page-header {
+      margin-bottom: 40px;
+    }
+    .page-header .label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: normal;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .page-header .meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* AWARD BADGE */
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fffbea;
+      border: 1px solid #f0d060;
+      border-radius: 6px;
+      padding: 14px 20px;
+      margin-bottom: 40px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+    }
+    .award-badge .trophy { font-size: 1.4rem; }
+    .award-badge strong { color: #7a5900; }
+
+    /* BODY TEXT */
+    .body-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      color: #333;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .body-text p { margin-bottom: 16px; }
+
+    /* WHAT WE BUILT */
+    .section-title {
+      font-size: 0.78rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bullet-list {
+      padding-left: 20px;
+      margin-bottom: 40px;
+    }
+    .bullet-list li {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    /* PHOTO GRID */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .photo-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+    }
+    /* Placeholder for missing images */
+    .photo-placeholder {
+      width: 100%;
+      height: 200px;
+      background: #e8e8e8;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      color: #999;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* SKILLS TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .tag {
+      background: #eef3f8;
+      color: var(--accent);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 560px) {
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .page-header h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="index.html#projects" class="active">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> &rsaquo; <a href="index.html#projects">Projects</a> &rsaquo; Probie Technologies
+    </div>
+
+    <div class="page-header">
+      <div class="label">Project &mdash; Entrepreneurship</div>
+      <h1>Probie Technologies</h1>
+      <div class="meta">February 2025 &ndash; June 2025 &nbsp;&middot;&nbsp; Tufts University Derby New Ventures Competition</div>
+    </div>
+
+    <div class="award-badge">
+      <span class="trophy">&#127942;</span>
+      <span><strong>3rd Place &amp; $5,000 Award</strong> &mdash; Derby New Ventures Competition 2025</span>
+    </div>
+
+    <h2 class="section-title">Overview</h2>
+    <div class="body-text">
+      <p>
+        Probie Technologies was a startup concept developed to address a concrete inefficiency in law enforcement:
+        police report writing. Through field research across multiple police departments, we identified that officers
+        were spending up to an hour per report on manual administrative tasks &mdash; time that could be returned to
+        the community through better tooling.
+      </p>
+      <p>
+        We designed a cloud-based Computer Aided Dispatch (CAD) and Records Management System featuring
+        AI-assisted tools to automate evidence synthesis and streamline report generation. The vision was a
+        suite of automated efficiency tools that would reduce reliance on manual data compilation and return
+        thousands of officer-hours per year back to public service.
+      </p>
+    </div>
+
+    <h2 class="section-title">What We Built</h2>
+    <ul class="bullet-list">
+      <li>Identified and quantified administrative inefficiencies in police report-writing workflows through field research across multiple departments, uncovering opportunities to reduce report completion time by up to 1 hour per report.</li>
+      <li>Designed a cloud-based system architecture with AI-assisted tools to automate evidence synthesis and streamline report generation, reducing reliance on manual data compilation.</li>
+      <li>Developed a full business plan and pitch, advancing through three competitive rounds in the Derby New Ventures Competition at Tufts University.</li>
+      <li>Secured 3rd place and a $5,000 award against a competitive field of student ventures.</li>
+    </ul>
+
+    <h2 class="section-title">Skills</h2>
+    <div class="tags" style="margin-bottom: 40px;">
+      <span class="tag">Public Speaking</span>
+      <span class="tag">Software Design</span>
+      <span class="tag">Market Research</span>
+      <span class="tag">Business Planning</span>
+      <span class="tag">AI Tools</span>
+      <span class="tag">Cloud Architecture</span>
+    </div>
+
+    <h2 class="section-title">Photos</h2>
+    <div class="photo-grid">
+      <!--
+        Replace each photo-placeholder below with an <img> tag once you have the image files.
+        Example: <img src="probie1.jpg" alt="Team at competition" />
+        Upload probie1.jpg, probie2.jpg, probie3.jpg to your GitHub repo alongside this file.
+      -->
+      <div class="photo-placeholder">Upload probie1.jpg<br>(team photo)</div>
+      <div class="photo-placeholder">Upload probie2.jpg<br>(presentation)</div>
+      <div class="photo-placeholder">Upload probie3.jpg<br>(check / award)</div>
+    </div>
+
+    <a class="back-link" href="index.html#projects">&larr; Back to Projects</a>
+
+    <footer>&copy; 2026 Will Eykyn</footer>
+
+  </div>
+</body>
+</html>

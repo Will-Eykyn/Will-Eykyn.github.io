@@ -24,80 +24,164 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 60px 24px 100px;
+    }
+
+    /* BANNER */
+    .banner {
+      width: 100%;
+      height: 260px;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+      display: block;
+    }
+    .banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 28px 40px;
+    }
+    .banner-name {
+      font-size: 2.4rem;
+      font-weight: normal;
+      color: #fff;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
     /* NAV */
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 64px;
-      padding-bottom: 20px;
+      background: #fff;
       border-bottom: 1px solid var(--border);
-    }
-    nav .name {
-      font-size: 1.1rem;
-      font-weight: bold;
-      letter-spacing: 0.01em;
-      color: var(--text);
-      text-decoration: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 24px;
+      gap: 0;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
     nav ul li a {
+      display: block;
+      padding: 16px 20px;
       color: var(--muted);
       text-decoration: none;
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.9rem;
-      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
     }
-    nav ul li a:hover { color: var(--accent); }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 52px 24px 100px;
+    }
 
     /* HERO */
-    .hero { margin-bottom: 64px; }
-    .hero h1 {
-      font-size: 2.4rem;
-      font-weight: normal;
-      margin-bottom: 16px;
-      line-height: 1.2;
+    .hero {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin-bottom: 64px;
     }
-    .hero p {
+    .headshot {
+      flex-shrink: 0;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--border);
+      background: #ddd;
+    }
+    .headshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .headshot-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 1.05rem;
+      font-size: 0.7rem;
+      color: #999;
+      text-align: center;
+      padding: 10px;
+    }
+    .hero-text h1 {
+      font-size: 1.7rem;
+      font-weight: normal;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .hero-text p {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
       color: #444;
-      max-width: 560px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
+      line-height: 1.7;
     }
     .hero-links {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
+
+    /* LINKEDIN CARD */
+    .linkedin-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #0077b5;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 5px;
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.88rem;
-      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .linkedin-card:hover { background: #005f94; }
+    .linkedin-card svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.88rem;
+      border-radius: 5px;
       text-decoration: none;
       transition: all 0.2s;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
+    .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: #1f4a6e; }
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-    }
+    .btn-secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
     .btn-secondary:hover { background: var(--accent-light); }
 
     /* SECTIONS */
@@ -109,6 +193,8 @@
       letter-spacing: 0.12em;
       color: var(--muted);
       margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
     }
 
     /* PROJECTS */
@@ -118,16 +204,15 @@
       border-radius: 6px;
       padding: 28px;
       margin-bottom: 20px;
+      transition: box-shadow 0.2s;
     }
+    .project:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
     .project h3 {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: bold;
       margin-bottom: 8px;
     }
-    .project h3 a {
-      color: var(--text);
-      text-decoration: none;
-    }
+    .project h3 a { color: var(--text); text-decoration: none; }
     .project h3 a:hover { color: var(--accent); }
     .project p {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -136,11 +221,7 @@
       margin-bottom: 16px;
       line-height: 1.6;
     }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
       background: var(--tag-bg);
       color: var(--tag-text);
@@ -154,20 +235,18 @@
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 24px;
     }
     .skill-group h3 {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: bold;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 8px;
     }
-    .skill-group ul {
-      list-style: none;
-    }
+    .skill-group ul { list-style: none; }
     .skill-group ul li {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.93rem;
@@ -175,29 +254,16 @@
       padding: 3px 0;
     }
 
-    /* ABOUT */
-    .about-text {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.97rem;
-      color: #444;
-      line-height: 1.75;
-    }
-    .about-text p { margin-bottom: 16px; }
-
     /* CONTACT */
     .contact-line {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.97rem;
       color: #444;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .contact-line a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    .contact-line a { color: var(--accent); text-decoration: none; }
     .contact-line a:hover { text-decoration: underline; }
 
-    /* FOOTER */
     footer {
       margin-top: 80px;
       padding-top: 20px;
@@ -207,167 +273,167 @@
       color: var(--muted);
     }
 
-    @media (max-width: 540px) {
+    @media (max-width: 580px) {
+      .hero { flex-direction: column; gap: 24px; }
       .skills-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 1.9rem; }
-      nav ul { gap: 16px; }
+      .banner-name { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
+  <div class="banner">
+    <img src="banner.jpg" alt="Colorado mountains" />
+    <div class="banner-overlay">
+      <span class="banner-name">Will Eykyn</span>
+    </div>
+  </div>
+
   <nav>
-    <a class="name" href="#">Will Eykyn</a>
     <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="resume.html">Resume</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <div class="hero">
-    <h1>Data & Software Engineer<br>based in Denver, CO</h1>
-    <p>
-      CS grad from Tufts University. I build data pipelines, predictive models,
-      and software tools that turn messy data into clear answers.
-    </p>
-    <div class="hero-links">
-      <a class="btn btn-primary" href="mailto:willeykyn@gmail.com">Get in touch</a>
-      <a class="btn btn-secondary" href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">GitHub</a>
-      <!-- Swap in your actual resume PDF link once hosted -->
-      <!-- <a class="btn btn-secondary" href="resume.pdf" target="_blank">Resume</a> -->
+  <div class="content">
+
+    <div class="hero">
+      <div class="headshot">
+        <!-- Replace this div with: <img src="headshot.jpg" alt="Will Eykyn" /> once you have a headshot -->
+        <div class="headshot-placeholder">Add headshot.jpg</div>
+      </div>
+      <div class="hero-text">
+        <h1>Data &amp; Software Engineer<br>based in Denver, CO</h1>
+        <p>
+          CS grad from Tufts University (Magna Cum Laude). I build data pipelines,
+          predictive models, and software tools that turn messy data into clear answers.
+        </p>
+        <div class="hero-links">
+          <a class="linkedin-card" href="https://www.linkedin.com/in/william-eykyn/" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            View LinkedIn Profile
+          </a>
+          <a class="btn btn-secondary" href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-primary" href="mailto:willeykyn@gmail.com">Get in touch</a>
+        </div>
+      </div>
     </div>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <div class="project">
+        <h3><a href="https://github.com/Will-Eykyn/AISMaritimeTracker" target="_blank" rel="noopener">AIS Maritime Tracker</a></h3>
+        <p>
+          Built a real-time asset monitoring system continuously ingesting live telemetry from active vessels,
+          tracking operational parameters (position, speed, heading) for vessels within a monitored region.
+          Designed the data pipeline to reliably ingest, structure, and display high-frequency streaming data,
+          and containerized the application with Docker for consistent, repeatable deployment.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Data Pipelines</span>
+          <span class="tag">Real-time Monitoring</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Geospatial</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3><a href="https://drive.google.com/drive/folders/11_-kh6sfEKKpuZMmz9LubLy7iDYOta5w" target="_blank" rel="noopener">Using Machine Learning to Design Sails &ndash; North Sails</a></h3>
+        <p>
+          During an internship at North Sails, developed machine learning models to predict batten stiffness
+          from physical sail measurements. Used ML.NET with LGBM (Light Gradient Boosted Machine) to train
+          models across batten positions, validated results with R&sup2; analysis, and built Excel workbooks to
+          track predictions against actual outputs. The solution is now integrated into North Sails' internal
+          design software and used by sail designers globally.
+        </p>
+        <div class="tags">
+          <span class="tag">C#</span>
+          <span class="tag">ML.NET</span>
+          <span class="tag">LGBM</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Data Validation</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3><a href="probie.html">Probie Technologies &ndash; Derby New Ventures Competition</a></h3>
+        <p>
+          Co-founded a startup concept targeting administrative inefficiencies in police report-writing workflows.
+          Won 3rd place and a $5,000 award after advancing through three competitive rounds in the Derby New
+          Venture Competition at Tufts University.
+        </p>
+        <div class="tags">
+          <span class="tag">Entrepreneurship</span>
+          <span class="tag">AI Tools</span>
+          <span class="tag">Market Research</span>
+          <span class="tag">Public Speaking</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Programming</h3>
+          <ul>
+            <li>Python</li>
+            <li>SQL</li>
+            <li>C#</li>
+            <li>C++</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Tools &amp; Platforms</h3>
+          <ul>
+            <li>SQL Server Management Studio</li>
+            <li>ML.NET</li>
+            <li>Docker</li>
+            <li>Git / GitHub</li>
+            <li>Visual Studio / VS Code</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Data &amp; Analysis</h3>
+          <ul>
+            <li>Data pipelines</li>
+            <li>Machine learning (LGBM)</li>
+            <li>Model validation (R&sup2;)</li>
+            <li>Excel &amp; data modeling</li>
+            <li>Tableau</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Other</h3>
+          <ul>
+            <li>Object-oriented programming</li>
+            <li>Linux</li>
+            <li>REST APIs</li>
+            <li>Geospatial data</li>
+            <li>Technical writing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="contact-line">Email: <a href="mailto:willeykyn@gmail.com">willeykyn@gmail.com</a></p>
+      <p class="contact-line">LinkedIn: <a href="https://www.linkedin.com/in/william-eykyn/" target="_blank" rel="noopener">linkedin.com/in/william-eykyn</a></p>
+      <p class="contact-line">GitHub: <a href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">github.com/Will-Eykyn</a></p>
+      <p class="contact-line">Location: Denver, CO</p>
+    </section>
+
+    <footer>&copy; 2026 Will Eykyn</footer>
+
   </div>
-
-  <section id="projects">
-    <h2>Projects</h2>
-
-    <div class="project">
-      <h3><a href="https://github.com/Will-Eykyn/AISMaritimeTracker" target="_blank" rel="noopener">AIS Maritime Tracker</a></h3>
-      <p>
-        Built a Python data pipeline that ingests live AIS (Automatic Identification System)
-        vessel position data, processes and stores it, and visualizes ship movements in real time.
-        The system handles continuous streaming data and is designed to monitor maritime traffic patterns.
-      </p>
-      <div class="tags">
-        <span class="tag">Python</span>
-        <span class="tag">Data Pipelines</span>
-        <span class="tag">Geospatial</span>
-        <span class="tag">APIs</span>
-        <span class="tag">Docker</span>
-      </div>
-    </div>
-
-    <div class="project">
-      <h3><a href="#" target="_blank" rel="noopener">Sail Performance ML Model &mdash; North Sails</a></h3>
-      <p>
-        During an internship at North Sails (Newport, RI), developed machine learning models
-        to predict batten stiffness from physical sail measurements. Used ML.NET with LGBM
-        (Light Gradient Boosted Machine) to train one model per batten position within each sail
-        type, validated results with R&sup2; analysis, and built Excel workbooks to track
-        model predictions against actual outputs.
-      </p>
-      <div class="tags">
-        <span class="tag">C#</span>
-        <span class="tag">ML.NET</span>
-        <span class="tag">LGBM</span>
-        <span class="tag">SQL Server</span>
-        <span class="tag">Machine Learning</span>
-        <span class="tag">Data Validation</span>
-      </div>
-    </div>
-
-    <div class="project">
-      <h3><a href="#" target="_blank" rel="noopener">Probie &mdash; Derby New Ventures Competition</a></h3>
-      <p>
-        Co-founded a startup concept through Tufts University's Derby New Ventures competition.
-        Conducted market research, synthesized findings, and presented to a panel of judges.
-        Developed business modeling and competitive analysis skills in a structured entrepreneurship program.
-      </p>
-      <div class="tags">
-        <span class="tag">Entrepreneurship</span>
-        <span class="tag">Market Research</span>
-        <span class="tag">Presentation</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h3>Languages</h3>
-        <ul>
-          <li>Python</li>
-          <li>SQL</li>
-          <li>C#</li>
-          <li>R</li>
-          <li>JavaScript</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Tools & Platforms</h3>
-        <ul>
-          <li>SQL Server Management Studio</li>
-          <li>ML.NET</li>
-          <li>Docker</li>
-          <li>Git / GitHub</li>
-          <li>Visual Studio</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Data & ML</h3>
-        <ul>
-          <li>Data pipelines</li>
-          <li>Machine learning (LGBM)</li>
-          <li>Model validation (R&sup2;)</li>
-          <li>Correlation analysis</li>
-          <li>Data cleaning & QA</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Other</h3>
-        <ul>
-          <li>Object-oriented programming</li>
-          <li>REST APIs</li>
-          <li>Geospatial data</li>
-          <li>Technical writing</li>
-          <li>Excel / data modeling</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <h2>About</h2>
-    <div class="about-text">
-      <p>
-        I grew up sailing competitively and got interested in how data could improve performance on
-        the water. That curiosity led me to study Computer Science at Tufts University, where I
-        graduated in 2024.
-      </p>
-      <p>
-        I spent time as an intern at North Sails in Newport, RI, building machine learning tools
-        to predict sail material properties. After that I moved to Denver, where I'm continuing to
-        build data and software projects while looking for my next role.
-      </p>
-      <p>
-        Outside of work: I sail, play piano, and go to live music when I can.
-      </p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p class="contact-line">Email: <a href="mailto:willeykyn@gmail.com">willeykyn@gmail.com</a></p>
-    <p class="contact-line">GitHub: <a href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">github.com/Will-Eykyn</a></p>
-    <p class="contact-line">Location: Denver, CO</p>
-  </section>
-
-  <footer>
-    &copy; 2026 Will Eykyn
-  </footer>
-
 </body>
 </html>
