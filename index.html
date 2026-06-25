@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will Eykyn</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f7;
+      --text: #1a1a1a;
+      --muted: #666;
+      --accent: #2c5f8a;
+      --accent-light: #e8f0f8;
+      --border: #e0e0e0;
+      --card-bg: #ffffff;
+      --tag-bg: #eef3f8;
+      --tag-text: #2c5f8a;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 64px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    nav .name {
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    nav ul li a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero { margin-bottom: 64px; }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: normal;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.88rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #1f4a6e; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .btn-secondary:hover { background: var(--accent-light); }
+
+    /* SECTIONS */
+    section { margin-bottom: 64px; }
+    section h2 {
+      font-size: 0.78rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    /* PROJECTS */
+    .project {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .project h3 {
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .project h3 a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    .project h3 a:hover { color: var(--accent); }
+    .project p {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.93rem;
+      color: #444;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .skill-group h3 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .skill-group ul {
+      list-style: none;
+    }
+    .skill-group ul li {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.93rem;
+      color: #333;
+      padding: 3px 0;
+    }
+
+    /* ABOUT */
+    .about-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      color: #444;
+      line-height: 1.75;
+    }
+    .about-text p { margin-bottom: 16px; }
+
+    /* CONTACT */
+    .contact-line {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      color: #444;
+      margin-bottom: 12px;
+    }
+    .contact-line a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contact-line a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 540px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.9rem; }
+      nav ul { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="name" href="#">Will Eykyn</a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <h1>Data & Software Engineer<br>based in Denver, CO</h1>
+    <p>
+      CS grad from Tufts University. I build data pipelines, predictive models,
+      and software tools that turn messy data into clear answers.
+    </p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="mailto:willeykyn@gmail.com">Get in touch</a>
+      <a class="btn btn-secondary" href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">GitHub</a>
+      <!-- Swap in your actual resume PDF link once hosted -->
+      <!-- <a class="btn btn-secondary" href="resume.pdf" target="_blank">Resume</a> -->
+    </div>
+  </div>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+      <h3><a href="https://github.com/Will-Eykyn/AISMaritimeTracker" target="_blank" rel="noopener">AIS Maritime Tracker</a></h3>
+      <p>
+        Built a Python data pipeline that ingests live AIS (Automatic Identification System)
+        vessel position data, processes and stores it, and visualizes ship movements in real time.
+        The system handles continuous streaming data and is designed to monitor maritime traffic patterns.
+      </p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Data Pipelines</span>
+        <span class="tag">Geospatial</span>
+        <span class="tag">APIs</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <h3><a href="#" target="_blank" rel="noopener">Sail Performance ML Model &mdash; North Sails</a></h3>
+      <p>
+        During an internship at North Sails (Newport, RI), developed machine learning models
+        to predict batten stiffness from physical sail measurements. Used ML.NET with LGBM
+        (Light Gradient Boosted Machine) to train one model per batten position within each sail
+        type, validated results with R&sup2; analysis, and built Excel workbooks to track
+        model predictions against actual outputs.
+      </p>
+      <div class="tags">
+        <span class="tag">C#</span>
+        <span class="tag">ML.NET</span>
+        <span class="tag">LGBM</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Data Validation</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <h3><a href="#" target="_blank" rel="noopener">Probie &mdash; Derby New Ventures Competition</a></h3>
+      <p>
+        Co-founded a startup concept through Tufts University's Derby New Ventures competition.
+        Conducted market research, synthesized findings, and presented to a panel of judges.
+        Developed business modeling and competitive analysis skills in a structured entrepreneurship program.
+      </p>
+      <div class="tags">
+        <span class="tag">Entrepreneurship</span>
+        <span class="tag">Market Research</span>
+        <span class="tag">Presentation</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <ul>
+          <li>Python</li>
+          <li>SQL</li>
+          <li>C#</li>
+          <li>R</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Tools & Platforms</h3>
+        <ul>
+          <li>SQL Server Management Studio</li>
+          <li>ML.NET</li>
+          <li>Docker</li>
+          <li>Git / GitHub</li>
+          <li>Visual Studio</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Data & ML</h3>
+        <ul>
+          <li>Data pipelines</li>
+          <li>Machine learning (LGBM)</li>
+          <li>Model validation (R&sup2;)</li>
+          <li>Correlation analysis</li>
+          <li>Data cleaning & QA</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Other</h3>
+        <ul>
+          <li>Object-oriented programming</li>
+          <li>REST APIs</li>
+          <li>Geospatial data</li>
+          <li>Technical writing</li>
+          <li>Excel / data modeling</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="about-text">
+      <p>
+        I grew up sailing competitively and got interested in how data could improve performance on
+        the water. That curiosity led me to study Computer Science at Tufts University, where I
+        graduated in 2024.
+      </p>
+      <p>
+        I spent time as an intern at North Sails in Newport, RI, building machine learning tools
+        to predict sail material properties. After that I moved to Denver, where I'm continuing to
+        build data and software projects while looking for my next role.
+      </p>
+      <p>
+        Outside of work: I sail, play piano, and go to live music when I can.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="contact-line">Email: <a href="mailto:willeykyn@gmail.com">willeykyn@gmail.com</a></p>
+    <p class="contact-line">GitHub: <a href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">github.com/Will-Eykyn</a></p>
+    <p class="contact-line">Location: Denver, CO</p>
+  </section>
+
+  <footer>
+    &copy; 2026 Will Eykyn
+  </footer>
+
+</body>
+</html>
