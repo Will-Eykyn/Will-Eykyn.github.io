@@ -28,17 +28,20 @@
 
     /* BANNER */
     .banner {
-      width: 100%;
+      width: 100vw;
       height: 260px;
       position: relative;
       overflow: hidden;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .banner img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 60%;
+      object-position: center 50%;
       display: block;
+      transform: scale(1.12);
     }
     .banner-overlay {
       position: absolute;
@@ -104,9 +107,9 @@
     }
     .headshot {
       flex-shrink: 0;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
+      width: 150px;
+      height: 175px;
+      border-radius: 8px;
       overflow: hidden;
       border: 3px solid var(--border);
       background: #ddd;
@@ -115,6 +118,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
     }
     .headshot-placeholder {
       width: 100%;
@@ -273,6 +277,56 @@
       color: var(--muted);
     }
 
+    /* MODAL */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 10px;
+      padding: 36px 40px;
+      max-width: 380px;
+      width: 90%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      position: relative;
+    }
+    .modal h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+    .modal-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.97rem;
+      color: #333;
+    }
+    .modal-row a { color: var(--accent); text-decoration: none; }
+    .modal-row a:hover { text-decoration: underline; }
+    .modal-icon { font-size: 1.1rem; width: 22px; text-align: center; }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--text); }
+
     @media (max-width: 580px) {
       .hero { flex-direction: column; gap: 24px; }
       .skills-grid { grid-template-columns: 1fr; }
@@ -319,7 +373,7 @@
             View LinkedIn Profile
           </a>
           <a class="btn btn-secondary" href="https://github.com/Will-Eykyn" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn btn-primary" href="mailto:willeykyn@gmail.com">Get in touch</a>
+          <button class="btn btn-primary" onclick="document.getElementById('contactModal').classList.add('open')">Get in touch</button>
         </div>
       </div>
     </div>
@@ -435,5 +489,22 @@
     <footer>&copy; 2026 Will Eykyn</footer>
 
   </div>
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-backdrop" id="contactModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">&times;</button>
+      <h3>Get in touch</h3>
+      <div class="modal-row">
+        <span class="modal-icon">&#9993;</span>
+        <a href="mailto:willeykyn@gmail.com">willeykyn@gmail.com</a>
+      </div>
+      <div class="modal-row">
+        <span class="modal-icon">&#128222;</span>
+        <a href="tel:+19175735998">+1 (917) 573-5998</a>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
